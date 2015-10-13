@@ -1,6 +1,9 @@
 from flask import Flask, redirect, url_for, render_template, request, session
+import sqlite3
 
 app = Flask(__name__)
+conn=sqlite3.connect("users.db")
+c=conn.cursor()
 
 @app.route('/')
 def home():
@@ -18,8 +21,6 @@ def read():
 def comment():
 	return 'Coming Soon';
 
-conn=sqlite.connect("users.db")
-c=conn.cursor()
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
