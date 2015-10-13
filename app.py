@@ -18,8 +18,20 @@ def read():
 def comment():
 	return 'Coming Soon';
 
+conn=sqlite.connect("users.db")
+c=conn.cursor()
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method='POST':
+        username=request.form['user']
+        password=request.form['pass']
+        isMatch="""
+        SELECT users.username,users.password
+        FROM users
+        WHERE users.username="""+username+"users.password="+password
+        userlist=c.execute(isMatch)
+        if username in userlist:
+            return redirect('/'+username)
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -32,4 +44,4 @@ def new():
 
 if __name__=='__main__':
     app.debug = True
-    app.run(host='0.0.0.0', post = 8000)
+    app.run(host='0.0.0.0', port = 8000)
