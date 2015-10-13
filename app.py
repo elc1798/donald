@@ -22,7 +22,7 @@ conn=sqlite.connect("users.db")
 c=conn.cursor()
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method='POST':
+    if request.method=='POST':
         username=request.form['user']
         password=request.form['pass']
         isMatch="""
