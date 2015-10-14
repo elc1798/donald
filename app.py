@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, session
 import sqlite3
 
 #Functions
-from query import confirmLogin
+from query import confirmLogin, registerUser
 
 
 app = Flask(__name__)
@@ -38,6 +38,15 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method=='POST':
+        print 2
+        username=request.form['Username']
+        password=request.form['Password']
+        first=request.form['First Name']
+        last=request.form['Last Name']
+        if registerUser(first,last,username,password):
+            return redirect('/new')
+        return render_template('signup.html')
     return render_template('signup.html')
 
 @app.route('/new', methods=['GET', 'POST'])
