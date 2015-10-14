@@ -25,17 +25,16 @@ def read():
 def comment():
 	return 'Coming Soon';
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
-        print 1
         username=request.form['Username']
         password=request.form['Password']
         if confirmLogin(username,password):
           #  session['login']=username
             return redirect('/new')
-        return render_template('test.html')
-    return render_template('test.html')
+        return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
