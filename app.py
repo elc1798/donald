@@ -1,6 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 import sqlite3
 
+#Functions
+from query import confirmLogin
+
+
 app = Flask(__name__)
 conn=sqlite3.connect("users.db")
 c=conn.cursor()
@@ -21,19 +25,17 @@ def read():
 def comment():
 	return 'Coming Soon';
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/test', methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
-        username=request.form['user']
-        password=request.form['pass']
-        isMatch="""
-        SELECT users.username,users.password
-        FROM users
-        WHERE users.username="""+username+"users.password="+password
-        userlist=c.execute(isMatch)
-        if username in userlist:
-            return redirect('/'+username)
-    return render_template('login.html')
+        print 1
+        username=request.form['Username']
+        password=request.form['Password']
+        if confirmLogin(username,password):
+          #  session['login']=username
+            return redirect('/new')
+        return render_template('test.html')
+    return render_template('test.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
