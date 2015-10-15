@@ -19,7 +19,7 @@ def profile(username=''):
 	return render_template('profile.html')
 
 @app.route('/post')
-def read():
+def read2():
     return render_template('post.html')
 
 @app.route('/@<username>/<post>')
@@ -72,3 +72,4 @@ def new():
 if __name__=='__main__':
     app.debug = True
     app.run(host='0.0.0.0', port = 8000)
+    app.secret_key="Don't store this on github"
