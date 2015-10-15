@@ -143,6 +143,43 @@ h3 {
     text-shadow: 0 1px 1px #333;
 }
 
+
+
+#post header {
+  margin: 0;
+  color: #333;
+  text-align: center;
+  padding: 2.5em 2em 0;
+  border-bottom: 1px solid #eee;
+}
+
+#post header h1 {
+  margin: 0.2em 0;
+  font-size: 3em;
+  font-weight: 300;
+}
+
+#post header h2 {
+  font-weight: 300;
+  color: #ccc;
+  padding: 0;
+  margin-top: 0;
+}
+
+#post article {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#post article p {
+  color: #777;
+  margin: 0 auto;
+  padding: 0 2em;
+  max-width: 800px;
+  margin-bottom: 50px;
+  line-height: 1.6em;
+}
+
 .footer {
     text-align: center;
     padding: 1em 0;

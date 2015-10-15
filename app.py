@@ -18,7 +18,7 @@ def profile(username=''):
 	return render_template('profile.html')
 
 @app.route('/@<username>/<post>')
-def read():
+def read(username, post):
 	return render_template('post.html')
 
 @app.route('/@<username>/<post>/comments', methods=['POST'])
@@ -58,8 +58,8 @@ def new():
    #     title=request.form['title']
    #     body=request.form['text']
    #     username=session['user']
-        
-        
+
+
     return render_template('new.html')
 
 if __name__=='__main__':
