@@ -35,7 +35,7 @@ def confirmLogin(username, password):
 def newPost(username,title, post, date):
     conn=sqlite3.connect(userdata)
     c=conn.cursor()
-    add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slugify(title)+"','"+username+",date)"
+    add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slugify(title)+"','"+username+"','"+date+"')"
     c.execute(add)
     conn.commit()
 
