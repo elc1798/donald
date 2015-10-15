@@ -32,4 +32,23 @@ def confirmLogin(username, password):
     conn.commit()
     return False
 
+def newPost(username,title, post, date):
+    conn=sqlite3.connect(userdata)
+    c=conn.cursor()
+    add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slugify(title)+"','"+username+",date)"
+    c.execute(add)
+    conn.commit()
 
+
+
+#helpers______________
+
+def slugify(title):
+    slug=""
+    for character in title:
+        if character!=" ":
+            slug+=character
+        else:
+            slug+="-"
+    print slug
+    return slug

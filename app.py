@@ -14,7 +14,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/@<username>')
-def profile():
+def profile(username=''):
 	return render_template('profile.html')
 
 @app.route('/@<username>/<post>')
@@ -28,22 +28,25 @@ def comment():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
+
         username=request.form['Username']
         password=request.form['Password']
+
         if confirmLogin(username,password):
-          #  session['login']=username
-            return redirect('/new')
+            session['user']=username
+            return redirect('/@'+username)
         return render_template('login.html')
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method=='POST':
-        print 2
+
         username=request.form['Username']
         password=request.form['Password']
         first=request.form['First Name']
         last=request.form['Last Name']
+
         if registerUser(first,last,username,password):
             return redirect('/new')
         return render_template('signup.html')
@@ -51,6 +54,12 @@ def signup():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
+   # if request.method='POST':
+   #     title=request.form['title']
+   #     body=request.form['text']
+   #     username=session['user']
+        
+        
     return render_template('new.html')
 
 if __name__=='__main__':
