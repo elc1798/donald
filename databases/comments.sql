@@ -1,4 +1,4 @@
-create table comments(posttitle text, body text, username text,);
+create table comments(postslug text, body text, username text,date date);
 
 insert into comments('We-vote-for-Mr.-Trump!', 'obviously fake', 'Ben Carson', '2015-10-12');
 insert into comments('We-vote-for-Mr.-Trump!', 'that one person', 'Obama', '2015-10-12');
