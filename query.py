@@ -39,6 +39,12 @@ def newPost(username,title, post, date):
     c.execute(add)
     conn.commit()
 
+def newComment(postslug, body, username, date):
+    conn=sqlite3.connect(userdata)
+    c=conn.cursor()
+    add = "INSERT INTO comments VALUES('"+postslug+"','"+ body+"','"+username+"','"+ date+"')"
+    c.execute(add)
+    conn.commit()
 
 
 #helpers______________
