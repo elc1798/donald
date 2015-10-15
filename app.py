@@ -19,6 +19,9 @@ def profile(username=''):
 	return render_template('profile.html')
 
 @app.route('/post')
+def read():
+    return render_template('post.html')
+
 @app.route('/@<username>/<post>')
 def read(username, post):
 	return render_template('post.html')
