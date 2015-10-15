@@ -38,6 +38,7 @@ def newPost(username,title, post, date):
     add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slugify(title)+"','"+username+"','"+date+"')"
     c.execute(add)
     conn.commit()
+    return 0
 
 def newComment(postslug, body, username, date):
     conn=sqlite3.connect(userdata)

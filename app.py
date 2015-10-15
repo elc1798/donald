@@ -1,9 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 import sqlite3
 import datetime
+import unicodedata
 
 #Functions
-from query import confirmLogin, registerUser
+from query import confirmLogin, registerUser, newPost
 
 
 app = Flask(__name__)
@@ -66,10 +67,13 @@ def new():
         date = []
         today = datetime.date.today()
         date.append(today)
-        newPost(username, title, post, date[0])
+        strdate=str(date[0])
+        newPost(username, title, body, strdate)
+        return render_template('/@'+username)
     return render_template('new.html')
 
 if __name__=='__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port = 8000)
     app.secret_key="Don't store this on github"
+    app.run(host='0.0.0.0', port = 8000)
+ 
