@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 import sqlite3
+import datetime
 
 #Functions
 from query import confirmLogin, registerUser
@@ -17,6 +18,7 @@ def home():
 def profile(username=''):
 	return render_template('profile.html')
 
+@app.route('/post')
 @app.route('/@<username>/<post>')
 def read(username, post):
 	return render_template('post.html')
@@ -54,12 +56,14 @@ def signup():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
-   # if request.method='POST':
-   #     title=request.form['title']
-   #     body=request.form['text']
-   #     username=session['user']
-
-
+    if request.method='POST':
+        title=request.form['title']
+        body=request.form['text']
+        username=session['user']
+        date = []
+        today = datetime.date.today()
+        date.append(today)
+        newPost(username, title, post, date[0])
     return render_template('new.html')
 
 if __name__=='__main__':
