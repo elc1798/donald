@@ -56,7 +56,7 @@ def signup():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
-    if request.method='POST':
+    if request.method=='POST':
         title=request.form['title']
         body=request.form['text']
         username=session['user']
