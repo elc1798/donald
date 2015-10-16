@@ -25,7 +25,7 @@ def read2():
 
 @app.route('/@<username>/<post>')
 def read(username, post):
-    return render_template('post.html',username=username,post=post)
+    return render_template('post.html',username,post)
 
 @app.route('/@<username>/<post>/comments', methods=['POST'])
 def comment():
