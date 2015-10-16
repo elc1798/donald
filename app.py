@@ -4,7 +4,7 @@ import datetime
 import unicodedata
 
 #Functions
-from query import confirmLogin, registerUser, newPost
+from query import confirmLogin, registerUser, newPost, newComment
 
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ conn=sqlite3.connect("users.db")
 c=conn.cursor()
 
 @app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html')
 
