@@ -17,7 +17,7 @@ def home():
 
 @app.route('/@<username>')
 def profile(username=''):
-	return render_template('profile.html')
+    return render_template('profile.html')
 
 @app.route('/post')
 def read2():
@@ -69,7 +69,8 @@ def new():
         date.append(today)
         strdate=str(date[0])
         newPost(username, title, body, strdate)
-        return render_template('/@'+username)
+        return redirect('/@'+username)
+#       return render_template('/@'+username)
     return render_template('new.html')
 
 if __name__=='__main__':
