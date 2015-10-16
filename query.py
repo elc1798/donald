@@ -2,6 +2,7 @@ import sqlite3
 
 userdata="databases/users.db"
 postdata="databases/posts.db"
+commentdata="databases/comments.db"
 
 def registerUser(first, last, username, password):
     conn=sqlite3.connect(userdata)
@@ -43,7 +44,7 @@ def newPost(username,title, post, date, slug):
     return 0
 
 def newComment(postslug, body, username, date):
-    conn=sqlite3.connect(userdata)
+    conn=sqlite3.connect(commentdata)
     c=conn.cursor()
     add = "INSERT INTO comments VALUES('"+postslug+"','"+ body+"','"+username+"','"+ date+"')"
     c.execute(add)
