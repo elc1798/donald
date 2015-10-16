@@ -4,7 +4,7 @@ import datetime
 import unicodedata
 
 #Functions
-from query import confirmLogin, registerUser, newPost
+from query import confirmLogin, registerUser, newPost, newComment
 
 
 app = Flask(__name__)
