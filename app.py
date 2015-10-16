@@ -76,6 +76,9 @@ def new():
 #       return render_template('/@'+username)
     return render_template('new.html')
 
+@app.route('/about')
+def about():
+    return render_template("index.html")
 
 if __name__=='__main__':
     app.debug = True
