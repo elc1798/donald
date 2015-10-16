@@ -55,6 +55,7 @@ def signup():
         last=request.form['Last Name']
 
         if registerUser(first,last,username,password):
+            session['user']=username
             return redirect('/new')
         return render_template('signup.html')
     return render_template('signup.html')
