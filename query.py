@@ -1,12 +1,10 @@
 import sqlite3
+import create
 
-userdata="databases/users.db"
-postdata="databases/posts.db"
-commentdata="databases/comments.db"
-
+conn=sqlite3.connect("donald.db")
+c=conn.cursor()
 def registerUser(first, last, username, password):
-    conn=sqlite3.connect(userdata)
-    c=conn.cursor()
+   
     compare="""
     SELECT users.username, users.password
     FROM users
@@ -21,8 +19,7 @@ def registerUser(first, last, username, password):
     return True
 
 def confirmLogin(username, password):
-    conn=sqlite3.connect(userdata)
-    c=conn.cursor()
+  
     isMatch="""
     SELECT users.username,users.password
     FROM users
@@ -35,8 +32,7 @@ def confirmLogin(username, password):
     return False
 
 def newPost(username,title, post, date, slug):
-    conn=sqlite3.connect(postdata)
-    c=conn.cursor()
+   
     add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slug+"','"+username+"','"+date+"')"
     c.execute(add)
     conn.commit()
@@ -44,8 +40,7 @@ def newPost(username,title, post, date, slug):
     return 0
 
 def newComment(postslug, body, username, date):
-    conn=sqlite3.connect(commentdata)
-    c=conn.cursor()
+  
     add = "INSERT INTO comments VALUES('"+postslug+"','"+ body+"','"+username+"','"+ date+"')"
     c.execute(add)
     conn.commit()
