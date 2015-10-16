@@ -23,7 +23,8 @@ def confirmLogin(username, password):
     isMatch="""
     SELECT users.username,users.password
     FROM users
-    WHERE users.username='"""+username+"' and users.password='"+password+"'"
+    WHERE users.username='"+username+"' and users.password='"+password+"'
+    """
     userlist=c.execute(isMatch)
     for i in userlist:
         if i[0]==username and i[1]==password:
