@@ -4,7 +4,7 @@ import datetime
 import unicodedata
 
 #Functions
-from query import confirmLogin, registerUser, newPost, newComment
+from query import confirmLogin, registerUser, newPost, newComment, slugify
 
 
 app = Flask(__name__)
@@ -66,14 +66,16 @@ def new():
         title=request.form['title']
         body=request.form['text']
         username=session['user']
+        slug=slugify(title)
         date = []
         today = datetime.date.today()
         date.append(today)
         strdate=str(date[0])
-        newPost(username, title, body, strdate)
-        return redirect('/@'+username)
+        newPost(username, title, body, strdate, slug)
+        return redirect('/@'+username+'/'+slug)
 #       return render_template('/@'+username)
     return render_template('new.html')
+
 
 if __name__=='__main__':
     app.debug = True

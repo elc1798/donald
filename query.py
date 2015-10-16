@@ -1,6 +1,7 @@
 import sqlite3
 
 userdata="databases/users.db"
+postdata="databases/posts.db"
 
 def registerUser(first, last, username, password):
     conn=sqlite3.connect(userdata)
@@ -32,10 +33,10 @@ def confirmLogin(username, password):
     conn.commit()
     return False
 
-def newPost(username,title, post, date):
-    conn=sqlite3.connect(userdata)
+def newPost(username,title, post, date, slug):
+    conn=sqlite3.connect(postdata)
     c=conn.cursor()
-    add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slugify(title)+"','"+username+"','"+date+"')"
+    add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slug+"','"+username+"','"+date+"')"
     c.execute(add)
     conn.commit()
     print "hello"
