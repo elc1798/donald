@@ -1,10 +1,10 @@
 import sqlite3
-import create
+import setup
 
 conn=sqlite3.connect("donald.db")
 c=conn.cursor()
 def registerUser(first, last, username, password):
-   
+
     compare="""
     SELECT users.username, users.password
     FROM users
@@ -19,7 +19,7 @@ def registerUser(first, last, username, password):
     return True
 
 def confirmLogin(username, password):
-  
+
     isMatch="""
     SELECT users.username,users.password
     FROM users
@@ -32,7 +32,7 @@ def confirmLogin(username, password):
     return False
 
 def newPost(username,title, post, date, slug):
-   
+
     add="INSERT INTO posts VALUES('"+title+"','"+post+"','"+slug+"','"+username+"','"+date+"')"
     c.execute(add)
     conn.commit()
@@ -40,7 +40,7 @@ def newPost(username,title, post, date, slug):
     return 0
 
 def newComment(postslug, body, username, date):
-  
+
     add = "INSERT INTO comments VALUES('"+postslug+"','"+ body+"','"+username+"','"+ date+"')"
     c.execute(add)
     conn.commit()

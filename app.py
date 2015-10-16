@@ -4,7 +4,7 @@ import datetime
 import unicodedata
 
 #Functions
-import query
+from databases import query
 
 
 app = Flask(__name__)
@@ -84,4 +84,3 @@ if __name__=='__main__':
     app.debug = True
     app.secret_key="Don't store this on github"
     app.run(host='0.0.0.0', port = 8000)
- 
