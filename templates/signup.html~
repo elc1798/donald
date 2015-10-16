@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    SIGN UP
-  </head>
-  <body>
-    <form method = "POST" action = "/new">
-      First Name: <input type = "text" name = "firstname">
-      Last Name: <input type = "text" name = "lastname">
-      Username: <input type = "text" name = "username">
-      Password: <input type = "password" name = "password">
-      <button type = "submit">DONE</button>
-    </form>
-    
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donald - Signup</title>
+
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+  <link rel="stylesheet" href="/static/donald.css">
+</head>
+
+<body>
+  <div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+      <div class="header">
+        <h1 class="brand-title">Donald</h1>
+        <h2 class="brand-tagline">Trumps Other Blogs</h2>
+
+        <nav class="nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="pure-button" href="/about">About</a>
+              <a class="pure-button" href="/login">LOGIN</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="content pure-u-1 pure-u-md-3-4">
+      <div class="pure-g">
+        <div class="pure-u-1-4">
+        </div>
+        <div class="pure-u-1-2">
+	  <center><h1>SIGNUP HERE!</h1></center>
+          <form class="pure-form" method="POST">
+            <center><fieldset>
+		<p>What is your name?</p><br>
+	      <input type="text" placeholder="First Name" name="First Name">
+	      <input type="text" placeholder="Last Name" name="Last Name"><br><br>
+	      <p>Enter a username</p><br>
+	      <input type="text" placeholder="Username" name="Username"><br><br>
+	      <p>Enter a password</p><br>
+              <input type="password" placeholder="Password" name="Password"><br><br>
+              <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+            </fieldset></center>
+          </form>
+        </div>
+        <div class="pure-u-1-4">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
