@@ -12,38 +12,51 @@ conn=sqlite3.connect("users.db")
 c=conn.cursor()
 
 @app.route('/')
-@app.route('/home')
 def home():
-    return render_template('home.html')
+    posts = query.getAllPosts()
+    return render_template('home.html', posts=posts)
 
 @app.route('/@<username>')
-def profile(username=''):
-    return render_template('profile.html')
+def profile(username):
+    user = query.getUser(username)
+    posts = query.getPostsForUser(username)
+    if user:
+        return render_template('profile.html', user=user, posts=posts)
+    else:
+        return render_template('error.html')
 
-@app.route('/post')
-def read2():
-    return render_template('post.html')
+@app.route('/@<username>/<slug>')
+def read(username, slug):
+    post = query.getPost(username, slug)
+    user = query.getUser(username)
+    comments = query.getComments(username, slug)
 
-@app.route('/@<username>/<post>')
-def read(username, post):
-    return render_template('post.html',username=username,post=post)
+    if user and post:
+        return render_template('post.html', post=post,user=user,comments=comments)
+    else:
+        return render_template('error.html')
 
-@app.route('/@<username>/<post>/comments', methods=['POST'])
-def comment():
-	return 'Coming Soon';
+@app.route('/@<username>/<slug>/comments', methods=['POST'])
+def comment(username, slug):
+    cusername = request.form['username']
+    body = request.form['body']
+	if query.newComment(username, slug, body, cusername):
+        return redirect('/%s/%s' % username, slug)
+    else:
+        return render_template('error.html', error = 'comment creation failed')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='POST':
-
-        username=request.form['Username']
-        password=request.form['Password']
-
-        if query.confirmLogin(username,password):
+        username=request.form['username']
+        password=request.form['password']
+        if query.confirmLogin(username, password):
             session['user']=username
-            return redirect('/@'+username)
+            return redirect('/@%s' % username)
+        else:
+            return render_template('login.html', error = "Username and Password Incorrect")
+    else:
         return render_template('login.html')
-    return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -57,8 +70,10 @@ def signup():
         if query.registerUser(first,last,username,password):
             session['user']=username
             return redirect('/new')
+        else:
+            return render_template('signup.html', error = "There was a problem signing up try again")
+    else:
         return render_template('signup.html')
-    return render_template('signup.html')
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
@@ -66,19 +81,15 @@ def new():
         title=request.form['title']
         body=request.form['text']
         username=session['user']
-        slug=slugify(title)
-        date = []
-        today = datetime.date.today()
-        date.append(today)
-        strdate=str(date[0])
-        query.newPost(username, title, body, strdate, slug)
-        return redirect('/@'+username+'/'+slug)
-#       return render_template('/@'+username)
+        if query.newPost(username, title, body):
+            return redirect('/@%s' % (username)
+        else:
+            return render_template('error.html')
     return render_template('new.html')
 
 @app.route('/about')
 def about():
-    return render_template("index.html")
+    return render_template('about.html')
 
 if __name__=='__main__':
     app.debug = True
