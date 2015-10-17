@@ -4,12 +4,12 @@
 <head>
 
   <style>
-    .boxed{
-    border: 1px solid black;
-    padding-top: 25px;
-    padding-right: 50px;
-    padding-bottom: 25px;
-    padding-left: 50px;
+    .boxed {
+      border: 1px solid black;
+      padding-top: 25px;
+      padding-right: 50px;
+      padding-bottom: 25px;
+      padding-left: 50px;
     }
   </style>
 
@@ -44,21 +44,34 @@
         <div class="pure-u-1-4">
         </div>
         <div class="pure-u-1-2">
-	  <div class="boxed">
-	  <center><h1>SIGNUP HERE!</h1></center>
-          <form class="pure-form" method="POST">
-            <center><fieldset>
-		<p>What is your name?</p><br>
-	      <input type="text" placeholder="First Name" name="First Name">
-	      <input type="text" placeholder="Last Name" name="Last Name"><br><br>
-	      <p>Enter a username</p><br>
-	      <input type="text" placeholder="Username" name="Username"><br><br>
-	      <p>Enter a password</p><br>
-              <input type="password" placeholder="Password" name="Password"><br><br>
-              <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
-            </fieldset></center>
-          </form>
-	  </div>
+          <div class="boxed">
+            <center>
+              <h1>SIGNUP HERE!</h1>
+            </center>
+            <form class="pure-form" method="POST" action="/signup">
+              <center>
+                <fieldset>
+                  <p>What is your name?</p>
+                  <br>
+                  <input type="text" placeholder="First Name" name="first">
+                  <input type="text" placeholder="Last Name" name="last">
+                  <br>
+                  <br>
+                  <p>Enter a username</p>
+                  <br>
+                  <input type="text" placeholder="Username" name="username">
+                  <br>
+                  <br>
+                  <p>Enter a password</p>
+                  <br>
+                  <input type="password" placeholder="Password" name="password">
+                  <br>
+                  <br>
+                  <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+                </fieldset>
+              </center>
+            </form>
+          </div>
         </div>
         <div class="pure-u-1-4">
         </div>

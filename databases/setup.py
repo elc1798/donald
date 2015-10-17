@@ -1,16 +1,17 @@
 import sqlite3
 
-conn = sqlite3.connect("donald.db")
+con = sqlite3.connect("donald.db")
 
-c = conn.cursor()
+cur = con.cursor()
 
-q = "create table if not exists posts(title text, body text, slug text, username text, date date)"
-c.execute(q)
+sql = "CREATE TABLE IF NOT EXISTS posts(title TEXT, body TEXT, slug TEXT, username TEXT, created DATE)"
+cur.execute(sql)
 
-q = "create table if not exists comments(postslug text, body text, username text,date date)"
-c.execute(q)
+sql = "CREATE TABLE IF NOT EXISTS comments(postslug TEXT, body TEXT, username TEXT, created DATE)"
+cur.execute(sql)
 
-q = "create table if not exists users(firstname text, lastname text, username text, password text)"
-c.execute(q)
+sql = "CREATE TABLE IF NOT EXISTS users(first TEXT, last TEXT, username TEXT, password TEXT)"
+cur.execute(sql)
 
-conn.commit()
+con.commit()
+con.close()

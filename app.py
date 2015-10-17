@@ -49,10 +49,10 @@ def login():
 def signup():
     if request.method=='POST':
 
-        username=request.form['Username']
-        password=request.form['Password']
-        first=request.form['First Name']
-        last=request.form['Last Name']
+        username=request.form['username']
+        password=request.form['password']
+        first=request.form['first']
+        last=request.form['last']
 
         if query.registerUser(first,last,username,password):
             session['user']=username

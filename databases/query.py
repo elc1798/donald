@@ -1,21 +1,18 @@
 import sqlite3
 import setup
 
-conn=sqlite3.connect("donald.db")
-c=conn.cursor()
 def registerUser(first, last, username, password):
+    con = sqlite3.connect("donald.db")
+    cur=con.cursor()
 
-    compare="""
-    SELECT users.username, users.password
-    FROM users
-    """
-    registered=c.execute(compare)
-    for i in registered:
-        if i[0]==username:
-            return False
-    add="INSERT INTO users VALUES('"+first+"','"+last+"','"+username+"','"+password+"')"
-    c.execute(add)
-    conn.commit()
+    sql = "SELECT username FROM users WHERE username = \"%s\"" % (username)
+    if cur.execute(sql).fetchone():
+        return False
+        
+    sql = "INSERT INTO users (first, last, username, password) VALUES(\"%s\",\"%s\",\"%s\",\"%s\")" % (first, last, username, password)
+    cur.execute(sql)
+    con.commit()
+    con.close()
     return True
 
 def confirmLogin(username, password):
