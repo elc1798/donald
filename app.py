@@ -54,15 +54,16 @@ def comment(username, slug):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form['Username']
+        password = request.form['Password']
+        
         if query.confirmLogin(username, password):
             session['user'] = username
             return redirect('/@%s' % username)
-        else:
-            return render_template('login.html', error="Username and Password Incorrect")
-    else:
-        return render_template('login.html')
+    
+        return render_template('login.html', error="Username and Password Incorrect")
+    
+    return render_template('login.html')
 
 
 @app.route('/signup', methods=['GET', 'POST'])

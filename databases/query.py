@@ -27,8 +27,8 @@ def confirmLogin(username, password):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
-    sql = "SELECT username FROM users WHERE username = \"%s\", password = \"%s\"" % (username, password)
-    if cur.executr(sql).fetchone():
+    sql = "SELECT username FROM users WHERE username = \"%s\" and password = \"%s\"" % (username, password)
+    if cur.execute(sql).fetchone():
         con.close()
         return True
     else:
