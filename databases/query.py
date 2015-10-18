@@ -1,7 +1,7 @@
 import sqlite3
 import setup
 import time
-from slugify import slugify
+#from slugify import slugify
 import transform
 
 def registerUser(first, last, username, password):
@@ -155,3 +155,12 @@ def newComment(username, slug, body, cusername):
         print e
         con.close()
         return False
+
+def slugify(title):
+    newstring = ""
+    for letter in title:
+        if letter == " ":
+            newstring += "-"
+        else:
+            newstring += letter
+    return newstring
