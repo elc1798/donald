@@ -42,15 +42,16 @@
             <header class="post-header">
               <h2 class="post-title">{{post.title}}</h2>
               <p class="post-meta">
-                By <a class="post-author" href="/@{{post.author.username}}">{{post.author.firstName}} {{post.author.lastName}}</a> under <a class="post-category" href="#">{{post.topic}}</a>
+		
+                By <a class="post-author" href="/@{{post.username}}">{{post.username}} {{post.username}}</a> under <a class="post-category" href="#">{{post.title}}</a>
                 <br>
                 <br>
-                On {{post.date}}
+                On {{post.created}}
               </p>
             </header>
             <div class="post-description">
               <p>
-                {{post.text}}
+                {{post.body}}
               </p>
             </div>
           </section>

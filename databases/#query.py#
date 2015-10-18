@@ -94,7 +94,6 @@ def getAllPosts():
     sql = "SELECT * FROM posts"
     for post in cur.execute(sql).fetchall():
         posts.append(transform.post(post))
-        print posts
     con.close()
     return posts
 

@@ -58,7 +58,6 @@
 
               <button type="submit" class="pure-button pure-button-primary">Log in</button>
             </fieldset>
-	    {{error}}
           </form>
 	  </div>
         </div>
