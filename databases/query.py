@@ -104,7 +104,8 @@ def getPostsForUser(username):
     cur=con.cursor()
 
     posts = []
-    sql = "SELECT * FROM posts WHERE username = \"%s\", slug = \"%s\"" % (username, slug)
+    #sql = "SELECT * FROM posts WHERE username = \"%s\", slug = \"%s\"" % (username, slug)
+    sql = "SELECT * FROM posts WHERE username = \"%s\"" % (username)
     for post in cur.execute(sql).fetchall():
         posts.append(transform.post(post))
 
