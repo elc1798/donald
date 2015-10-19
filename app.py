@@ -82,7 +82,7 @@ def signup():
         if query.registerUser(first, last, username, password):
             session['user'] = username
             n=session['user']
-            return redirect('/new', n=n)
+            return redirect('/new')
         else:
             return render_template('signup.html', error="There was a problem signing up try again")
     else:
