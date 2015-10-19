@@ -25,7 +25,7 @@
 - Tony Li (Middleware)
 
 ## Setup
-`pip install flask`
+`pip install flask`  
 `pip install python-slugify`
 
 ## Run
