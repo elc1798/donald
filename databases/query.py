@@ -116,7 +116,7 @@ def getPost(username, slug):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
-    sql = "SELECT * FROM posts WHERE username = \"%s\", slug = \"%s\"" % (username, slug)
+    sql = "SELECT * FROM posts WHERE username = \"%s\" AND slug = \"%s\"" % (username, slug)
     post = cur.execute(sql).fetchone()
 
     if post:
@@ -132,7 +132,7 @@ def getComments(username, slug):
     cur=con.cursor()
 
     comments = []
-    sql = "SELECT * FROM comments WHERE username = \"%s\", slug = \"%s\"" % (username, slug)
+    sql = "SELECT * FROM comments WHERE username = \"%s\" AND slug = \"%s\"" % (username, slug)
     for comment in cur.execute(sql).fetchall():
         comments.append(transform.comment(comment))
 
