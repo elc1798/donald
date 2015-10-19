@@ -29,7 +29,7 @@ def profile(username):
     if user:
         return render_template('profile.html', user=user, posts=posts, n=n)
     else:
-        return render_template('error.html')
+        return render_template('error.html',n=n)
 
 
 @app.route('/@<username>/<slug>')
