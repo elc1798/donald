@@ -32,15 +32,18 @@ def profile(username):
         return render_template('error.html',n=n)
 
 
-@app.route('/@<username>/<slug>')
+@app.route('/@<username>/<slug>', methods=['GET','POST'])
 def read(username, slug):
-    post = query.getPost(username, slug)
-    user = query.getUser(username)
-    comments = query.getComments(username, slug)
     if 'user' in session:
         n = session['user']
-
+    post = query.getPost(username, slug)
+    user = query.getUser(username)
+    
     if user and post:
+        if request.method=='POST':
+            query.newComment(username,slug,request.form['text'],session['user'])
+        comments = query.getComments(username, slug)
+        print comments
         return render_template('post.html', n=n, post=post, user=user, comments=comments)
     else:
         return render_template('error.html')
@@ -94,7 +97,6 @@ def signup():
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if 'user' in session:
-        print session['user']
         n=session['user']
         if request.method == 'POST':
             title = request.form['title']

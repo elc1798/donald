@@ -118,7 +118,7 @@ def getComments(username, slug):
     sql = "SELECT * FROM comments WHERE username = \"%s\" AND slug = \"%s\"" % (username, slug)
     for comment in cur.execute(sql).fetchall():
         comments.append(transform.comment(comment))
-
+        print comment
     return comments
 
 

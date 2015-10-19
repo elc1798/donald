@@ -16,9 +16,9 @@ def post(post):
 
 def comment(comment):
     return {
-        "slug": comment[0],
-        "authorusername": comment[1],
+        "username": comment[0],
+        "slug": comment[1],
         "body": comment[2],
-        "username": post[3],
-        "created": post[4]
+        "cusername": comment[3],
+        "created": comment[4]
     }

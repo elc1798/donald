@@ -65,7 +65,7 @@
             <header class="post-header">
               <p class="post-meta">
 		
-                By <a class="post-author" href="/@{{coments.username}}">{{comments.username}}</a>
+                By <a class="post-author" href="/@{{comments.cusername}}">{{comments.cusername}}</a>
                 <br>
                 <br>
                 On {{comments.created}}
@@ -80,11 +80,11 @@
           {% endfor %}
 
 	  <br><br>
-
-	  <textarea rows="3" cols="100" placeholder = "Comment here..." name = "text"></textarea>
-	  <br><br>
-	  <button type="submit" class="pure-button pure-button-primary">Post</button>
-
+	  <form method="Post">
+	    <textarea rows="3" cols="100" placeholder = "Comment here..." name = "text"></textarea>
+	    <br><br>
+	    <button type="submit" class="pure-button pure-button-primary">Post</button>
+	  </form>
 
 
      </div>
