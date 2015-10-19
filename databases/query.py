@@ -53,23 +53,6 @@ def newPost(username, title, body):
         con.close()
         return False
 
-def newComment(slug, body, username):
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
-    created = time.strftime("%b %d, %Y")
-
-    sql = "INSERT INTO comments (slug, body, username, created) VALUES(\"%s\", \"%s\", \"%s\", \"%s\")" % (slug, body, username, created)
-    try:
-        cur.execute(sql)
-        con.commit()
-        con.close()
-        return True
-    except sqlite3.Error as e:
-        print e
-        con.close()
-        return False
-
 def getUser(username):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
