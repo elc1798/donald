@@ -37,9 +37,11 @@ def read(username, slug):
     post = query.getPost(username, slug)
     user = query.getUser(username)
     comments = query.getComments(username, slug)
+    if 'user' in session:
+        n = session['user']
 
     if user and post:
-        return render_template('post.html', post=post, user=user, comments=comments)
+        return render_template('post.html', n=n, post=post, user=user, comments=comments)
     else:
         return render_template('error.html')
 
