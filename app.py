@@ -124,6 +124,11 @@ def prof():
         return redirect('/@%s' % session['user'])
     return redirect('/login')
 
+@app.route('/logout')
+def logout():
+    session.clear();
+    return redirect('/login')
+
 
 if __name__ == '__main__':
     app.debug=True
