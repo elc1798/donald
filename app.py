@@ -115,6 +115,14 @@ def about():
         return render_template('about.html', n=n)
     return render_template('about.html')
 
+@app.route('/profile')
+def prof():
+    if 'user' in session:
+        n=session['user']
+        return redirect('/@%s' % session['user'])
+    return redirect('/login')
+
+
 if __name__ == '__main__':
     app.debug=True
     app.secret_key="Don't store this on github"
