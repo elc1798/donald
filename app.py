@@ -15,15 +15,19 @@ c = conn.cursor()
 @app.route('/')
 def home():
     posts = query.getAllPosts()
+    if 'user' in session:
+        n=session['user']
+        return render_template('home.html', posts=posts, n=n)
     return render_template('home.html', posts=posts)
-
 
 @app.route('/@<username>')
 def profile(username):
     user = query.getUser(username)
     posts = query.getPostsForUser(username)
+    if 'user' in session:
+        n=session['user']
     if user:
-        return render_template('profile.html', user=user, posts=posts)
+        return render_template('profile.html', user=user, posts=posts, n=n)
     else:
         return render_template('error.html')
 
@@ -77,7 +81,8 @@ def signup():
 
         if query.registerUser(first, last, username, password):
             session['user'] = username
-            return redirect('/new')
+            n=session['user']
+            return redirect('/new', n=n)
         else:
             return render_template('signup.html', error="There was a problem signing up try again")
     else:
@@ -86,20 +91,26 @@ def signup():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
-    if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['text']
-        username = session['user']
-        if query.newPost(username, title, body):
-            return redirect('/@%s' % (username))
+    if 'user' in session:
+        print session['user']
+        n=session['user']
+        if request.method == 'POST':
+            title = request.form['title']
+            body = request.form['text']
+            username = session['user']
+            if query.newPost(username, title, body):
+                return redirect('/@%s' % (username))
+            else:
+                return render_template('error.html')
         else:
-            return render_template('error.html')
-    else:
-        return render_template('new.html')
-
+            return render_template('new.html', n=n)
+    return redirect('/login')
 
 @app.route('/about')
 def about():
+    if 'user' in session:
+        n=session['user']
+        return render_template('about.html', n=n)
     return render_template('about.html')
 
 if __name__ == '__main__':

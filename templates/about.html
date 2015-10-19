@@ -21,12 +21,14 @@
             <li class="nav-item">
               <a class="pure-button" href="/about">About</a>
 
+	      {% if not n %}
               <!-- ONLY IF USER NOT LOGGED IN -->
               <a class="pure-button" href="/signup">Signup</a>
               <a class="pure-button" href="/login">Login</a>
-
+	      {% else %}
               <!-- ONLY IF USER LOGED IN -->
               <a class="pure-button" href="/new">New</a>
+	      {% endif %}
             </li>
           </ul>
         </nav>
