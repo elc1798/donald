@@ -59,6 +59,33 @@
 	
 	<br><br><br>
 	<h1 class="content-subhead">Comments</h1>
+	
+	{% for comments in comments %}
+          <section class="post">
+            <header class="post-header">
+              <p class="post-meta">
+		
+                By <a class="post-author" href="/@{{coments.username}}">{{comments.username}}</a>
+                <br>
+                <br>
+                On {{comments.created}}
+              </p>
+            </header>
+            <div class="post-description">
+              <p>
+                {{comments.body}}
+              </p>
+            </div>
+          </section>
+          {% endfor %}
+
+	  <br><br>
+
+	  <textarea rows="3" cols="100" placeholder = "Comment here..." name = "text"></textarea>
+	  <br><br>
+	  <button type="submit" class="pure-button pure-button-primary">Post</button>
+
+
 
      </div>
 
