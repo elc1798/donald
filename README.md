@@ -23,3 +23,10 @@
 - Helen Li (UX)
 - David Song (Backend)
 - Tony Li (Middleware)
+
+## Setup
+`pip install flask`
+`pip install python-slugify`
+
+## Run
+`python app.py`
