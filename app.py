@@ -27,7 +27,7 @@ def profile(username):
     if 'user' in session:
         n=session['user']
     else:
-        return render_template('error.html')
+        return render_template('profile.html', user=user, posts=posts)
     if user:
         return render_template('profile.html', user=user, posts=posts, n=n) #n is not defined when user is not logged in
     else:
