@@ -114,7 +114,7 @@ def new():
 def about():
     if 'user' in session:
         n=session['user']
-        return render_template('about.html', n=n)
+        return render_template('about.html', n=n) #n is not defined when user is not logged in
     return render_template('about.html')
 
 @app.route('/profile')
