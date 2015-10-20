@@ -26,8 +26,10 @@ def profile(username):
     posts = query.getPostsForUser(username)
     if 'user' in session:
         n=session['user']
+    else:
+        return render_template('error.html')
     if user:
-        return render_template('profile.html', user=user, posts=posts, n=n)
+        return render_template('profile.html', user=user, posts=posts, n=n) #n is not defined when user is not logged in
     else:
         return render_template('error.html',n=n)
 
@@ -114,7 +116,7 @@ def new():
 def about():
     if 'user' in session:
         n=session['user']
-        return render_template('about.html', n=n) #n is not defined when user is not logged in
+        return render_template('about.html', n=n)
     return render_template('about.html')
 
 @app.route('/profile')
