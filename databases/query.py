@@ -4,6 +4,7 @@ import time
 #from slugify import slugify
 import transform
 
+# REFACTOR BY KAHSOON
 def registerUser(first, last, username, password):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
@@ -23,6 +24,7 @@ def registerUser(first, last, username, password):
         con.close()
         return False
 
+# REFACTOR BY HOYIN
 def confirmLogin(username, password):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
@@ -35,6 +37,7 @@ def confirmLogin(username, password):
         con.close()
         return False
 
+# REFACTOR BY ETHAN
 def newPost(username, title, body):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
@@ -53,6 +56,7 @@ def newPost(username, title, body):
         con.close()
         return False
 
+# REFACTOR BY KAHSOON
 def getUser(username):
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
