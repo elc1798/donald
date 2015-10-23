@@ -24,9 +24,11 @@ def registerUser(first, last, username, password):
 
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
-    connection = MongoClient()
+    connection = pymongo.MongoClient()
     db = connection['user.db']
-    db.user.find({"username":username}
+    asdf = db.user.find({"username":username, "password":password})
+    connection.close()
+    return len(asdf) == 1
 """    con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -75,8 +77,12 @@ def getUser(username):
         }
     else:
         return False
-
+#REFACTOR BY HOYIN
 def getAllPosts():
+    connection = pymongo.MongoClient()
+    db = connection['user.db']
+    
+    """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -87,7 +93,7 @@ def getAllPosts():
         print posts
     con.close()
     return posts
-
+"""
 
 def getPostsForUser(username):
     con = sqlite3.connect("donald.db")
