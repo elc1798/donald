@@ -1,9 +1,7 @@
-import sqlite3
 import setup
 import time
-#from slugify import slugify
 import transform
-
+from pymongo import MongoClient
 # REFACTOR BY KAHSOON
 def registerUser(first, last, username, password):
     con = sqlite3.connect("donald.db")
@@ -26,7 +24,10 @@ def registerUser(first, last, username, password):
 
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
-    con = sqlite3.connect("donald.db")
+    connection = MongoClient()
+    db = connection['user.db']
+    db.user.find({"username":username}
+"""    con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
     sql = "SELECT username FROM users WHERE username = \"%s\" and password = \"%s\"" % (username, password)
@@ -36,6 +37,8 @@ def confirmLogin(username, password):
     else:
         con.close()
         return False
+"""
+
 
 # REFACTOR BY ETHAN
 def newPost(username, title, body):
