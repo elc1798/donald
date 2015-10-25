@@ -14,7 +14,6 @@ def registerUser(first, last, username, password):
         return True
     else:
         return False
-print (registerUser("a","b","c","d"))
 
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
@@ -59,6 +58,16 @@ def newPost(username, title, body):
 
 # REFACTOR BY KAHSOON
 def getUser(username):
+    connection = MongoClient()
+    db = connection ['user']
+    result = db.user.find({"username":username})
+    if result.count() == 1:
+        return {"first":result[0]["first"],
+                "last":result[0]["last"],
+                "username":username}
+    else:
+        return False
+    """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -73,6 +82,8 @@ def getUser(username):
         }
     else:
         return False
+    """
+    
 #REFACTOR BY HOYIN
 def getAllPosts():
     connection = MongoClient()
