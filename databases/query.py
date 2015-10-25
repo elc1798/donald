@@ -123,7 +123,10 @@ def getPost(username, slug):
         con.close()
         return False
 
+#REFACTOR BY SARAH
 def getComments(username, slug):
+    #con = pymongo.MongoClient()
+    #db = con['donald.db']
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
