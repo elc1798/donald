@@ -2,29 +2,23 @@ import setup
 import time
 import transform
 from pymongo import MongoClient
+
+
 # REFACTOR BY KAHSOON
 def registerUser(first, last, username, password):
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
-    sql = "SELECT username FROM users WHERE username = \"%s\"" % (username)
-    if cur.execute(sql).fetchone():
-        return False
-
-    sql = "INSERT INTO users (first, last, username, password) VALUES(\"%s\",\"%s\",\"%s\",\"%s\")" % (first, last, username, password)
-    try:
-        cur.execute(sql)
-        con.commit()
-        con.close()
+    connection = MongoClient()
+    db = connection ['user']
+    result = db.user.find({"username":username}).count()
+    if result == 0:
+        db.user.insert({"first":first, "last":last, "username":username, "password":password})
         return True
-    except sqlite3.Error as e:
-        print e
-        con.close()
+    else:
         return False
+print (registerUser("a","b","c","d"))
 
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
-    connection = pymongo.MongoClient()
+    connection = MongoClient()
     db = connection['user.db']
     asdf = db.user.find({"username":username, "password":password})
     connection.close()
@@ -44,6 +38,7 @@ def confirmLogin(username, password):
 
 # REFACTOR BY ETHAN
 def newPost(username, title, body):
+    """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -60,6 +55,7 @@ def newPost(username, title, body):
         print e
         con.close()
         return False
+    """
 
 # REFACTOR BY KAHSOON
 def getUser(username):
@@ -79,7 +75,7 @@ def getUser(username):
         return False
 #REFACTOR BY HOYIN
 def getAllPosts():
-    connection = pymongo.MongoClient()
+    connection = MongoClient()
     db = connection['user.db']
     
     """
@@ -125,6 +121,7 @@ def getPost(username, slug):
 
 #REFACTOR BY SARAH
 def getComments(username, slug):
+    """
     #con = pymongo.MongoClient()
     #db = con['donald.db']
     con = sqlite3.connect("donald.db")
@@ -136,10 +133,11 @@ def getComments(username, slug):
         comments.append(transform.comment(comment))
         print comment
     return comments
-
+    """
 
 
 def newComment(username, slug, body, cusername):
+    """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -155,6 +153,7 @@ def newComment(username, slug, body, cusername):
         print e
         con.close()
         return False
+    """
 
 def slugify(title):
     newstring = ""
