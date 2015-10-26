@@ -7,11 +7,11 @@ def user(user):
 
 def post(post):
     return {
-        "title": post[0],
-        "body": post[1],
-        "slug": post[2],
-        "username": post[3],
-        "created": post[4]
+        "title": post["title"],
+        "body": post["body"],
+        "slug": post["slug"],
+        "username": post["username"],
+        "created": post["created"]
     }
 
 def comment(comment):
