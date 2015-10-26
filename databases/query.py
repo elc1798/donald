@@ -81,6 +81,8 @@ def getPostsForUser(username):
     connection = MongoClient()
     db = connection['donald.db']
     result = db.donald.find({'username':username})
+    for post in result:
+        post = transform.post(post))
     connection.close()
     return result
 """
