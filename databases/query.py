@@ -18,7 +18,7 @@ def registerUser(first, last, username, password):
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
     connection = MongoClient()
-    db = connection['user.db']
+    db = connection['user']
     data = db.user.find({"username":username, "password":password})
     connection.close()
     return len(data) == 1
@@ -60,8 +60,10 @@ def getUser(username):
 #REFACTOR BY HOYIN
 def getAllPosts():
     connection = MongoClient()
-    db = connection['donald.db']
+    db = connection['donald']
     result = db.donald.find()
+    result = result.fetchall()
+    print len(result)
     connection.close()
     return result
     """
@@ -79,8 +81,10 @@ def getAllPosts():
 #REFACTOR BY HOYIN
 def getPostsForUser(username):
     connection = MongoClient()
-    db = connection['donald.db']
+    db = connection['donald']
     result = db.donald.find({'username':username})
+    for post in result:
+        post = transform.post(post)
     connection.close()
     return result
 """
@@ -156,3 +160,5 @@ def slugify(title):
             newstring += letter
     return newstring
 #test
+
+print(getAllPosts())
