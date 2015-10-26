@@ -32,7 +32,7 @@ def newPost(username, title, body):
 # REFACTOR BY KAHSOON
 def getUser(username):
     connection = MongoClient()
-    db = connection ['user']
+    db = connection ['blog']
     result = db.user.find({"username":username})
     if result.count() == 1:
         return {"first":result[0]["first"],
@@ -55,15 +55,13 @@ def getUser(username):
         }
     else:
         return False
-    """
-    
+    """    
 #REFACTOR BY HOYIN
 def getAllPosts():
     connection = MongoClient()
     db = connection['donald']
     result = db.donald.find()
     result = result.fetchall()
-    print len(result)
     connection.close()
     return result
     """
@@ -101,6 +99,14 @@ def getPostsForUser(username):
     return posts
 """
 def getPost(username, slug):
+    connection = MongoClient()
+    db = connection ['blog']
+    result = db.donald.find({"username":username, "slug": slug})
+    if result.count() == 0:
+        return False
+    else:
+        return transform.post(result[0])
+    """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
 
@@ -114,7 +120,8 @@ def getPost(username, slug):
     else:
         con.close()
         return False
-
+    """
+    
 #REFACTOR BY SARAH
 def getComments(username, slug):
     """
@@ -160,5 +167,3 @@ def slugify(title):
             newstring += letter
     return newstring
 #test
-
-print(getAllPosts())
