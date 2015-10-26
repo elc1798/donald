@@ -19,42 +19,15 @@ def registerUser(first, last, username, password):
 def confirmLogin(username, password):
     connection = MongoClient()
     db = connection['user.db']
-    asdf = db.user.find({"username":username, "password":password})
+    data = db.user.find({"username":username, "password":password})
     connection.close()
-    return len(asdf) == 1
-"""    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
-    sql = "SELECT username FROM users WHERE username = \"%s\" and password = \"%s\"" % (username, password)
-    if cur.execute(sql).fetchone():
-        con.close()
-        return True
-    else:
-        con.close()
-        return False
-"""
-
+    return len(data) == 1
 
 # REFACTOR BY ETHAN
 def newPost(username, title, body):
-    """
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
-    created = time.strftime("%b %d, %Y")
-    slug = slugify(title)
-
-    sql="INSERT INTO posts (title, body, slug, username, created) VALUES(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")" % (title, body, slug, username, created)
-    try:
-        cur.execute(sql)
-        con.commit()
-        con.close()
-        return True
-    except sqlite3.Error as e:
-        print e
-        con.close()
-        return False
-    """
+    connection = MongoClient()
+    db = connection['user.db']
+    connection.close()
 
 # REFACTOR BY KAHSOON
 def getUser(username):
