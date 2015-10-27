@@ -7,7 +7,7 @@ from pymongo import MongoClient
 # REFACTOR BY KAHSOON
 def registerUser(first, last, username, password):
     connection = MongoClient()
-    db = connection ['user']
+    db = connection ['blog']
     result = db.user.find({"username":username}).count()
     if result == 0:
         db.user.insert({"first":first, "last":last, "username":username, "password":password})
@@ -18,7 +18,7 @@ def registerUser(first, last, username, password):
 # REFACTOR BY HOYIN
 def confirmLogin(username, password):
     connection = MongoClient()
-    db = connection['user']
+    db = connection['blog']
     data = db.user.find({"username":username, "password":password})
     connection.close()
     return len(data) == 1
@@ -59,7 +59,7 @@ def getUser(username):
 #REFACTOR BY HOYIN
 def getAllPosts():
     connection = MongoClient()
-    db = connection['donald']
+    db = connection['blog']
     result = db.donald.find()
     result = result.fetchall()
     connection.close()
@@ -79,7 +79,7 @@ def getAllPosts():
 #REFACTOR BY HOYIN
 def getPostsForUser(username):
     connection = MongoClient()
-    db = connection['donald']
+    db = connection['blog']
     result = db.donald.find({'username':username})
     for post in result:
         post = transform.post(post)
