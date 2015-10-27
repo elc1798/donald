@@ -61,9 +61,15 @@ def getAllPosts():
     connection = MongoClient()
     db = connection['blog']
     result = db.donald.find()
-    result = result.fetchall()
     connection.close()
-    return result
+    posts = []
+    for post in result:
+        posts.append(post)
+    i = 0
+    while(i < len(posts)):
+        posts[i] = transform.post(posts[i])
+        i+=1
+    return posts
     """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
@@ -121,7 +127,7 @@ def getPost(username, slug):
         con.close()
         return False
     """
-    
+#print getPost("Person","I-wrote-stuff")
 #REFACTOR BY SARAH
 def getComments(username, slug):
     """
@@ -167,3 +173,4 @@ def slugify(title):
             newstring += letter
     return newstring
 #test
+print getAllPosts()
