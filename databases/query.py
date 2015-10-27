@@ -21,7 +21,7 @@ def confirmLogin(username, password):
     db = connection['blog']
     data = db.user.find({"username":username, "password":password})
     connection.close()
-    return len(data) == 1
+    return data.count() == 1
 
 # REFACTOR BY ETHAN
 def newPost(username, title, body):
@@ -87,10 +87,15 @@ def getPostsForUser(username):
     connection = MongoClient()
     db = connection['blog']
     result = db.donald.find({'username':username})
-    for post in result:
-        post = transform.post(post)
     connection.close()
-    return result
+    posts = []
+    for post in result:
+        posts.append(post)
+    i = 0
+    while(i < len(posts)):
+        posts[i] = transform.post(posts[i])
+        i+=1
+    return posts
 """
     con = sqlite3.connect("donald.db")
     cur=con.cursor()
