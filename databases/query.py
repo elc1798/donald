@@ -111,25 +111,17 @@ def getComments(username, slug):
     return comments
     """
 
-
+#REFACTORED BY KAH SOON
 def newComment(username, slug, body, cusername):
-    """
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
+    connection = MongoClient()
+    db = connection ['blog']
     created = time.strftime("%b %d, %Y")
-    sql = "INSERT INTO comments (username, slug, body, cusername, created) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")" % (username, slug, body, cusername, created)
-
-    try:
-        cur.execute(sql)
-        con.commit()
-        con.close()
+    db.comment.insert({"username":username,"slug":slug,"body":body,"cusername":cusername,"created":created})
+    result = db.comment.find({"cusername":cusername})
+    if result.count() == 1:
         return True
-    except sqlite3.Error as e:
-        print e
-        con.close()
+    else:
         return False
-    """
 
 def slugify(title):
     newstring = ""
