@@ -26,7 +26,17 @@ def confirmLogin(username, password):
 # REFACTOR BY ETHAN
 def newPost(username, title, body):
     connection = MongoClient()
-    db = connection['user.db']
+    db = connection['blog']
+    created = time.strftime("%b %d, %Y")
+    slug = slugify(title)
+    post = {
+            "title": str(title),
+            "body": str(body),
+            "slug": str(slug),
+            "username": str(username),
+            "created": str(created)
+            }
+    db.donald.insert(post);
     connection.close()
 
 # REFACTOR BY KAHSOON
