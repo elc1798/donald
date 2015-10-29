@@ -9,6 +9,7 @@ def registerUser(first, last, username, password):
     connection = MongoClient()
     db = connection ['blog']
     result = db.user.find({"username":username}).count()
+    connection.close()
     if result == 0:
         db.user.insert({"first":first, "last":last, "username":username, "password":password})
         return True
@@ -44,28 +45,14 @@ def getUser(username):
     connection = MongoClient()
     db = connection ['blog']
     result = db.user.find({"username":username})
+    connection.close()
     if result.count() == 1:
         return {"first":result[0]["first"],
                 "last":result[0]["last"],
                 "username":username}
     else:
         return False
-    """
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
-    sql = "SELECT * FROM users WHERE username = \"%s\"" % (username)
-    user = cur.execute(sql).fetchone()
-
-    if user:
-        return {
-            "first": user[0],
-            "last": user[1],
-            "username": user[2]
-        }
-    else:
-        return False
-    """    
+    
 #REFACTOR BY HOYIN
 def getAllPosts():
     connection = MongoClient()
@@ -80,18 +67,7 @@ def getAllPosts():
         posts[i] = transform.post(posts[i])
         i+=1
     return posts
-    """
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
 
-    posts = []
-    sql = "SELECT * FROM posts"
-    for post in cur.execute(sql).fetchall():
-        posts.append(transform.post(post))
-        print posts
-    con.close()
-    return posts
-"""
 #REFACTOR BY HOYIN
 def getPostsForUser(username):
     connection = MongoClient()
@@ -106,42 +82,18 @@ def getPostsForUser(username):
         posts[i] = transform.post(posts[i])
         i+=1
     return posts
-"""
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
 
-    posts = []
-    #sql = "SELECT * FROM posts WHERE username = \"%s\", slug = \"%s\"" % (username, slug)
-    sql = "SELECT * FROM posts WHERE username = \"%s\"" % (username)
-    for post in cur.execute(sql).fetchall():
-        posts.append(transform.post(post))
-
-    con.close()
-    return posts
-"""
+#REFACTOR BY KAH SOON
 def getPost(username, slug):
     connection = MongoClient()
     db = connection ['blog']
     result = db.donald.find({"username":username, "slug": slug})
+    connection.close()
     if result.count() == 0:
         return False
     else:
         return transform.post(result[0])
-    """
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
 
-    sql = "SELECT * FROM posts WHERE username = \"%s\" AND slug = \"%s\"" % (username, slug)
-    post = cur.execute(sql).fetchone()
-
-    if post:
-        post = transform.post(post)
-        con.close()
-        return post
-    else:
-        con.close()
-        return False
-    """
 #print getPost("Person","I-wrote-stuff")
 #REFACTOR BY SARAH
 def getComments(username, slug):
