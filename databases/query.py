@@ -116,13 +116,21 @@ def newComment(username, slug, body, cusername):
     connection = MongoClient()
     db = connection ['blog']
     created = time.strftime("%b %d, %Y")
-    db.comment.insert({"username":username,"slug":slug,"body":body,"cusername":cusername,"created":created})
-    result = db.comment.find({"cusername":cusername})
+    comment ={"username":str(username),
+              "slug":str(slug),
+              "body":str(body),
+              "cusername":str(cusername),
+              "created":str(created)}
+    db.comments.insert(comment)
+    result = db.comments.find({"cusername":str(cusername)})
+    connection.close()
     if result.count() == 1:
         return True
     else:
         return False
 
+print newComment("c","asd-asd","asd asd", "123")
+    
 def slugify(title):
     newstring = ""
     for letter in title:
@@ -132,4 +140,3 @@ def slugify(title):
             newstring += letter
     return newstring
 #test
-print getAllPosts()
