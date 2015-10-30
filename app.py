@@ -104,6 +104,7 @@ def new():
             title = request.form['title']
             body = request.form['text']
             username = session['user']
+            #THIS IS CAUSING ERRORS
             if query.newPost(username, title, body):
                 return redirect('/@%s' % (username))
             else:

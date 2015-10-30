@@ -11,7 +11,7 @@ def post(post):
         "body": str(post["body"]),
         "slug": str(post["slug"]),
         "username": str(post["username"]),
-        "created": int(post["created"])
+        "created": str(post["created"])
     }
 
 def comment(comment):
@@ -20,5 +20,5 @@ def comment(comment):
         "slug": str(comment['slug']),
         "body": str(comment['body']),
         "cusername": str(comment['cusername']),
-        "created": int(comment['created'])
+        "created": str(comment['created'])
     }
