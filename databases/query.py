@@ -39,6 +39,7 @@ def newPost(username, title, body):
             }
     db.donald.insert(post);
     connection.close()
+    return True
 
 # REFACTOR BY KAHSOON
 def getUser(username):
