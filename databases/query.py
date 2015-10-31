@@ -98,19 +98,20 @@ def getPost(username, slug):
 #print getPost("Person","I-wrote-stuff")
 #REFACTOR BY SARAH
 def getComments(username, slug):
-    """
-    #con = pymongo.MongoClient()
-    #db = con['donald.db']
-    con = sqlite3.connect("donald.db")
-    cur=con.cursor()
-
+    conn = MongoClient()
+    db = conn['donald.db']
     comments = []
-    sql = "SELECT * FROM comments WHERE username = \"%s\" AND slug = \"%s\"" % (username, slug)
-    for comment in cur.execute(sql).fetchall():
-        comments.append(transform.comment(comment))
-        print comment
+
+    result = db.donald.find()
+    conn.close()
+
+    for comment in result:
+        comments.append(comment)
+    i = 0
+    while (i < len(comments)):
+        comments[i] = transform.comment(comments[i])
+        i += 1
     return comments
-    """
 
 #REFACTORED BY KAH SOON
 def newComment(username, slug, body, cusername):
