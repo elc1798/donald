@@ -95,22 +95,16 @@ def getPost(username, slug):
     else:
         return transform.post(result[0])
 
-#print getPost("Person","I-wrote-stuff")
 #REFACTOR BY SARAH
 def getComments(username, slug):
     conn = MongoClient()
-    db = conn['donald.db']
+    db = conn['blog']
     comments = []
-
-    result = db.donald.find()
+    result = db.comments.find({"slug": slug})
     conn.close()
-
     for comment in result:
-        comments.append(comment)
-    i = 0
-    while (i < len(comments)):
-        comments[i] = transform.comment(comments[i])
-        i += 1
+        comments.append(transform.comment(comment))
+    print comments
     return comments
 
 #REFACTORED BY KAH SOON
@@ -132,11 +126,5 @@ def newComment(username, slug, body, cusername):
         return False
     
 def slugify(title):
-    newstring = ""
-    for letter in title:
-        if letter == " ":
-            newstring += "-"
-        else:
-            newstring += letter
-    return newstring
-#test
+    return title.replace(" ", "-")
+
