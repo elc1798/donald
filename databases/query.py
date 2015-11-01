@@ -130,8 +130,6 @@ def newComment(username, slug, body, cusername):
         return True
     else:
         return False
-
-print newComment("c","asd-asd","asd asd", "123")
     
 def slugify(title):
     newstring = ""
